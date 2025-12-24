@@ -15,6 +15,7 @@ IPAddress mqttServer(192, 168, 1, 116);
 // MQTT credentials (if enabled)
 #define BROKER_USERNAME ""
 #define BROKER_PASSWORD ""
+#define TEMP_OFFSET  17.3
 
 const char* clientID = "rp2350-aht30";
 
@@ -197,7 +198,7 @@ if (sensorOK) {
   }
 
   if (measurementStarted && (now - measurementStartTime >= 80)) {
-    float tempF = aht.getTemperature_F() - 17.3;
+    float tempF = aht.getTemperature_F() - TEMP_OFFSET;
     float rh = aht.getHumidity_RH();
     static char tempBuf[10];
     dtostrf(tempF, 0, 2, tempBuf);
